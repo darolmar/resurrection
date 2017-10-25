@@ -1,0 +1,54 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.8.RELEASE'
+		cucumberVersion = '2.0.1'
+		springfoxVersion = '2.7.0'
+	}
+	repositories {
+		mavenCentral()
+        // So that the Gradle Cucumber Plugin can be downloaded:
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+
+group = 'com.edorasware.homework1'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+targetCompatibility= '1.8'
+
+bootRepackage {
+    mainClass = 'com.edorasware.homework1.ExpenseApplication'
+}
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-freemarker')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('com.zaxxer:HikariCP')
+	compile('org.apache.commons:commons-lang3:3.6')
+	compile('io.springfox:springfox-swagger2:' + springfoxVersion)
+	compile('io.springfox:springfox-swagger-ui:' + springfoxVersion)
+	runtime('org.springframework.boot:spring-boot-devtools')
+	runtime('com.h2database:h2')
+	runtime('mysql:mysql-connector-java')
+//	compileOnly('org.projectlombok:lombok')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+    // So that you can use the cucumber API's for your step implementations:
+    testCompile('io.cucumber:cucumber-java:2.0.1')
+    testCompile('io.cucumber:cucumber-junit:2.0.1')
+    testCompile('junit:junit:4.12')
+}
