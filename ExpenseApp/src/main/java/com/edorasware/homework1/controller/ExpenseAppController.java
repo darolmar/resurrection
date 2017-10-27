@@ -11,11 +11,6 @@ public class ExpenseAppController {
 	@RequestMapping("/")
 	String home(ModelMap modal) {
 		modal.addAttribute("title","Homework1");
-		return "index";
-	}
-
-	@RequestMapping("/partials/{page}")
-	String partialHandler(@PathVariable("page") final String page) {
-		return page;
+		return "index.html";
 	}
 }

@@ -1,5 +1,4 @@
-spring.freemarker.template-loader-path=classpath:/templates/
-spring.freemarker.suffix=.ftl
+logging.level.org.springframework: DEBUG
 ---
 server:
   port: 9090
