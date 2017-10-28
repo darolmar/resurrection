@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-
 <html ng-app="expenseApp">
     <head>
+		<meta charset="utf-8">
         <title>Resurrection: ExpenseApp</title>
         <link href="css/bootstrap.css" rel="stylesheet"/>
         <link href="css/app.css" rel="stylesheet"/>
         <script src="js/lib/angular.1.6.6.js" ></script>
+        <script src="js/lib/angular-cookies.1.6.7.js" ></script>
+        <script src="js/lib/angular-translate.2.15.2.js" ></script>
+        <script src="js/lib/angular-translate-storage-cookie.2.15.2.js" ></script>
         <script src="js/lib/angular-ui-router.1.0.10.js" ></script>
         <script src="js/lib/ngStorage.0.3.11.js" ></script>
         <script src="js/app/app.js"></script>
@@ -14,9 +17,13 @@
     </head>
     <body>
 <div class="generic-container" ui-view>
+              <div ng-controller="LanguageController">
+                <img src="images/Spain.png" ng-click="changeLanguage('es')" class="ng-scope"/>
+                <img src="images/United-Kingdom.png" ng-click="changeLanguage('en')" class="ng-scope"/>
+              </div>
     <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><span class="lead">Expense</span></div>
+        <div class="panel-heading"><span class="lead">{{ 'EXPENSE' | translate }}</span></div>
 		<div class="panel-body">
 	        <div class="formcontainer">
 	            <div class="alert alert-success" role="alert" ng-if="ctrl.successMessage">{{ctrl.successMessage}}</div>
@@ -25,35 +32,40 @@
 	                <input type="hidden" ng-model="ctrl.expense.id" />
 	                <div class="row">
 	                    <div class="form-group col-md-12">
-	                        <label class="col-md-2 control-lable" for="desc">Description</label>
+	                        <label class="col-md-2 control-lable" for="desc">{{ 'DESCRIPTION' | translate }}</label>
 	                        <div class="col-md-7">
-	                            <input type="text" ng-model="ctrl.expense.description" id="desc" class="description form-control input-sm" placeholder="Enter expense description" required ng-minlength="3"/>
+	                            <input type="text" ng-model="ctrl.expense.description" id="desc" class="description form-control input-sm" placeholder="{{ 'ENTER_DESC' | translate }}" required ng-minlength="3"/>
 	                        </div>
 	                    </div>
 	                </div>
 
 	                <div class="row">
 	                    <div class="form-group col-md-12">
-	                        <label class="col-md-2 control-lable" for="value">Value</label>
+	                        <label class="col-md-2 control-lable" for="value">{{ 'VALUE' | translate }}</label>
 	                        <div class="col-md-7">
-	                            <input type="text" ng-model="ctrl.expense.value" id="value" class="form-control input-sm" placeholder="Enter expense value" required ng-pattern="ctrl.onlyNumbers"/>
+	                            <input type="text" ng-model="ctrl.expense.value" id="value" class="form-control input-sm" placeholder="{{ 'ENTER_VALUE' | translate }}" required ng-pattern="ctrl.onlyNumbers"/>
 	                        </div>
 	                    </div>
 	                </div>
 	
 	                <div class="row">
 	                    <div class="form-group col-md-12">
-	                        <label class="col-md-2 control-lable" for="date">Date</label>
+	                        <label class="col-md-2 control-lable" for="date">{{ 'DATE' | translate }}</label>
 	                        <div class="col-md-7">
-	                            <input type="date" ng-model="ctrl.expense.date" id="date" class="form-control input-sm" placeholder="Enter expense date (yyyy-MM-dd)" required/>
+	                            <input type="date" ng-model="ctrl.expense.date" id="date" class="form-control input-sm" placeholder="{{ 'ENTER_DATE' | translate }}" required/>
 	                        </div>
 	                    </div>
 	                </div>
 
 	                <div class="row">
 	                    <div class="form-actions floatRight">
-	                        <input type="submit"  value="{{!ctrl.expense.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid || myForm.$pristine">
-	                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+	                    	<div ng-if="!ctrl.expense.id">
+		                        <input type="submit"  value="{{ 'BUTTON_ADD' | translate }}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid || myForm.$pristine">
+	                    	</div>
+	                    	<div ng-if="ctrl.expense.id">
+		                        <input type="submit"  value="{{ 'BUTTON_UPDATE' | translate }}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid || myForm.$pristine">
+	                    	</div>
+	                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">{{ 'BUTTON_RESET' | translate }}</button>
 	                    </div>
 	                </div>
 	            </form>
@@ -62,16 +74,16 @@
     </div>
     <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><span class="lead">List of Expenses</span></div>
+        <div class="panel-heading"><span class="lead">{{ 'LIST_EXPENSES' | translate }}</span></div>
 		<div class="panel-body">
 			<div class="table-responsive">
 		        <table class="table table-hover">
 		            <thead>
 		            <tr>
 		                <th>ID</th>
-		                <th>DESCRIPTION</th>
-		                <th>VALUE</th>
-		                <th>DATE</th>
+		                <th>{{ 'DESCRIPTION' | translate }}</th>
+		                <th>{{ 'VALUE' | translate }}</th>
+		                <th>{{ 'DATE' | translate }}</th>
 		                <th width="100"></th>
 		                <th width="100"></th>
 		            </tr>
@@ -82,8 +94,8 @@
 		                <td>{{expense.description}}</td>
 		                <td>{{expense.value}}</td>
 		                <td>{{expense.date | date:'medium'}}</td>
-		                <td><button type="button" ng-click="ctrl.editExpense(expense.id)" class="btn btn-success custom-width">Edit</button></td>
-		                <td><button type="button" ng-click="ctrl.removeExpense(expense.id)" class="btn btn-danger custom-width">Remove</button></td>
+		                <td><button type="button" ng-click="ctrl.editExpense(expense.id)" class="btn btn-success custom-width">{{ 'BUTTON_EDIT' | translate }}</button></td>
+		                <td><button type="button" ng-click="ctrl.removeExpense(expense.id)" class="btn btn-danger custom-width">{{ 'BUTTON_REMOVE' | translate }}</button></td>
 		            </tr>
 		            </tbody>
 		        </table>		

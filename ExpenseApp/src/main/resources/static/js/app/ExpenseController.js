@@ -111,6 +111,4 @@ angular.module('expenseApp').controller('ExpenseController',
             $scope.myForm.$setPristine(); //reset Form
         }
     }
-
-
     ]);
