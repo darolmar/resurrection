@@ -35,7 +35,6 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
-//	compile('org.springframework.boot:spring-boot-starter-freemarker')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('com.zaxxer:HikariCP')
@@ -45,7 +44,6 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('com.h2database:h2')
 	runtime('mysql:mysql-connector-java')
-//	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
     // So that you can use the cucumber API's for your step implementations:
     testCompile('io.cucumber:cucumber-java:2.0.1')
