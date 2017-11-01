@@ -5,6 +5,7 @@ buildscript {
 		springBootVersion = "1.5.8.RELEASE"
 		springCloudVersion = "Dalston.RELEASE"
 		springfoxVersion = "2.7.0"
+		springBootAdmin = "1.4.4"
 	}
 	repositories {
         jcenter()
@@ -166,5 +167,31 @@ project(":web-portal") {
     compile('org.springframework.cloud:spring-cloud-starter-hystrix')
     compile('org.springframework.cloud:spring-cloud-starter-hystrix-dashboard')
 	compile('org.springframework.cloud:spring-cloud-starter-turbine')
+	}
+}
+
+project(":admin-server") {
+	mainClassName = 'com.edorasware.microservices.admin.AdminServerApplication'
+
+	dependencyManagement {
+	  imports {
+	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Dalston.RELEASE'
+	  }
+	}
+	repositories {
+	    mavenCentral()
+	    jcenter()
+	}
+
+	dependencies {
+    // Basic Spring boot with config client
+    compile('org.springframework.cloud:spring-cloud-config-client')
+    compile('de.codecentric:spring-boot-admin-server' + ':' + springBootAdmin)
+    compile('de.codecentric:spring-boot-admin-server-ui' + ':' + springBootAdmin)
+    compile("org.springframework.boot:spring-boot-starter-web")    
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    
+    // Eureka client
+    compile('org.springframework.cloud:spring-cloud-starter-eureka')
 	}
 }
