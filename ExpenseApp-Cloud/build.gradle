@@ -3,9 +3,9 @@
 buildscript {
 	ext {
 		springBootVersion = "1.5.8.RELEASE"
-		springCloudVersion = "Dalston.RELEASE"
+		springCloudVersion = "Dalston.SR4"
 		springfoxVersion = "2.7.0"
-		springBootAdmin = "1.4.4"
+		springBootAdmin = "1.5.4"
 	}
 	repositories {
         jcenter()
@@ -47,7 +47,7 @@ project(":config-server") {
 
 	dependencyManagement {
 	  imports {
-	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Dalston.RELEASE'
+	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:' + springCloudVersion
 	  }
 	}
 	dependencies {
@@ -60,7 +60,7 @@ project(":registry-server") {
 
 	dependencyManagement {
 	  imports {
-	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Dalston.RELEASE'
+	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:' + springCloudVersion
 	  }
 	}
 	repositories {
@@ -80,7 +80,7 @@ project(":gateway") {
 
 	dependencyManagement {
 	  imports {
-	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Dalston.RELEASE'
+	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:' + springCloudVersion
 	  }
 	}
 	repositories {
@@ -89,7 +89,7 @@ project(":gateway") {
 	}
 
 	dependencies {
-	    compile(project(':expense-server'))
+//	    compile(project(':expense-server'))
 	    // Basic Spring boot with config client
 	    compile("org.springframework.cloud:spring-cloud-starter-config")
 	    compile("org.springframework.boot:spring-boot-starter-web")    
@@ -109,7 +109,7 @@ project(":expense-server") {
 
 	dependencyManagement {
 	  imports {
-	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Dalston.RELEASE'
+	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:' + springCloudVersion
 	  }
 	}
 	repositories {
@@ -146,7 +146,7 @@ project(":web-portal") {
 
 	dependencyManagement {
 	  imports {
-	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Dalston.RELEASE'
+	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:' + springCloudVersion
 	  }
 	}
 	repositories {
@@ -175,7 +175,7 @@ project(":admin-server") {
 
 	dependencyManagement {
 	  imports {
-	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Dalston.RELEASE'
+	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:' + springCloudVersion
 	  }
 	}
 	repositories {
@@ -190,6 +190,7 @@ project(":admin-server") {
     compile('de.codecentric:spring-boot-admin-server-ui' + ':' + springBootAdmin)
     compile("org.springframework.boot:spring-boot-starter-web")    
     compile("org.springframework.boot:spring-boot-starter-actuator")
+    	compile("org.springframework.cloud:spring-cloud-starter-zuul")
     
     // Eureka client
     compile('org.springframework.cloud:spring-cloud-starter-eureka')
