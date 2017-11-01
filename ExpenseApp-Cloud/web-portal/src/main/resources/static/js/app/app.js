@@ -1,8 +1,8 @@
 var app = angular.module('expenseApp',['ui.router','ngStorage','pascalprecht.translate','ngCookies']);
 
 app.constant('urls', {
-    BASE: 'http://localhost:9090/gateway',
-    EXPENSE_SERVICE_API : 'http://localhost:9090/gateway/api/expense/'
+    BASE: 'http://localhost:8090/',
+    EXPENSE_SERVICE_API : 'http://localhost:8090/'
 });
 
 app.config(['$stateProvider', '$urlRouterProvider','$translateProvider',
@@ -11,7 +11,7 @@ app.config(['$stateProvider', '$urlRouterProvider','$translateProvider',
         $stateProvider
             .state('home', {
                 url: '/',
-                templateUrl: '/gateway',
+                templateUrl: '/expenses-service',
                 controller:'ExpenseController',
                 controllerAs:'ctrl',
                 resolve: {
