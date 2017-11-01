@@ -1,0 +1,41 @@
+spring:
+  application:  
+# Name of the service that is using with Zuul routes to forward specific requests to this service  
+    name: expense-service
+  cloud:
+    config:
+# Define the URL from where this service would pick up it's external configuration. Note that it is
+# pointing to the config-server aplication         
+      uri: http://localhost:8888
+---
+spring:
+  profiles: local, default
+datasource:
+  sampleapp:
+    url: jdbc:h2:~/test
+    username: SA
+    password:
+    driverClassName: org.h2.Driver
+    defaultSchema:
+    maxPoolSize: 10
+    hibernate:
+      hbm2ddl.method: create-drop
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.H2Dialect
+---
+spring:
+  profiles: prod
+datasource:
+  sampleapp:
+    url: jdbc:mysql://localhost:3306/expenses
+    username: myuser
+    password: mypassword
+    driverClassName: com.mysql.jdbc.Driver
+    defaultSchema:
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: update
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.MySQLDialect
