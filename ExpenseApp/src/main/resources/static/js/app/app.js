@@ -15,7 +15,7 @@ app.config(['$stateProvider', '$urlRouterProvider','$translateProvider',
                 controller:'ExpenseController',
                 controllerAs:'ctrl',
                 resolve: {
-                    users: function ($q, ExpenseService) {
+                    expenses: function ($q, ExpenseService) {
                         console.log('Load all expenses');
                         var deferred = $q.defer();
                         ExpenseService.loadAllExpenses().then(deferred.resolve, deferred.resolve);

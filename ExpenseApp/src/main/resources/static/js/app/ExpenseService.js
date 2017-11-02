@@ -22,11 +22,11 @@ angular.module('expenseApp').factory('ExpenseService',
                     .then(
                         function (response) {
                             console.log('Fetched successfully all expenses');
-                            $localStorage.users = response.data;
+                            $localStorage.expenses = response.data;
                             deferred.resolve(response);
                         },
                         function (errResponse) {
-                            console.error('Error while loading users');
+                            console.error('Error while loading expenses');
                             deferred.reject(errResponse);
                         }
                     );
@@ -34,7 +34,7 @@ angular.module('expenseApp').factory('ExpenseService',
             }
 
             function getAllExpenses(){
-                return $localStorage.users;
+                return $localStorage.expenses;
             }
 
             function getExpense(id) {
