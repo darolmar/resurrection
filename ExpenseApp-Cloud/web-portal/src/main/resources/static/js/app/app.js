@@ -1,8 +1,8 @@
 var app = angular.module('expenseApp',['ui.router','ngStorage','pascalprecht.translate','ngCookies']);
 
 app.constant('urls', {
-    BASE: 'http://localhost:8090/',
-    EXPENSE_SERVICE_API : 'http://localhost:8090/'
+    BASE: 'http://localhost:8082/',
+    EXPENSE_SERVICE_API : '/expense/'
 });
 
 app.config(['$stateProvider', '$urlRouterProvider','$translateProvider',
@@ -11,11 +11,11 @@ app.config(['$stateProvider', '$urlRouterProvider','$translateProvider',
         $stateProvider
             .state('home', {
                 url: '/',
-                templateUrl: '/expenses-service',
+                templateUrl: 'index.html',
                 controller:'ExpenseController',
                 controllerAs:'ctrl',
                 resolve: {
-                    users: function ($q, ExpenseService) {
+                    expenses: function ($q, ExpenseService) {
                         console.log('Load all expenses');
                         var deferred = $q.defer();
                         ExpenseService.loadAllExpenses().then(deferred.resolve, deferred.resolve);

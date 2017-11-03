@@ -26,7 +26,7 @@ angular.module('expenseApp').factory('ExpenseService',
                             deferred.resolve(response);
                         },
                         function (errResponse) {
-                            console.error('Error while loading users');
+                            console.error('Error while loading expenses');
                             deferred.reject(errResponse);
                         }
                     );

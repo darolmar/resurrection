@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.cloud.netflix.turbine.EnableTurbine;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
  * The boot application class that defines the spring boot application to have
@@ -28,9 +30,14 @@ import org.springframework.cloud.netflix.turbine.EnableTurbine;
 @EnableEurekaClient
 @EnableHystrixDashboard
 @EnableTurbine
-public class PortalApplication {
+public class PortalApplication extends WebSecurityConfigurerAdapter {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PortalApplication.class, args);
 	}
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/**/*.html").permitAll().anyRequest().authenticated();
+	}
+	
 }
