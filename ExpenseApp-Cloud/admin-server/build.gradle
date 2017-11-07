@@ -1,0 +1,16 @@
+mainClassName = 'com.edorasware.microservices.admin.AdminServerApplication'
+	sourceCompatibility = '1.8'
+	targetCompatibility= '1.8'
+
+dependencies {
+	    // Basic Spring boot with config client
+	    compile('org.springframework.cloud:spring-cloud-config-client')
+	    compile('de.codecentric:spring-boot-admin-server' + ':' + springBootAdmin)
+	    compile('de.codecentric:spring-boot-admin-server-ui' + ':' + springBootAdmin)
+	    compile('org.springframework.boot:spring-boot-starter-web')    
+	    compile('org.springframework.boot:spring-boot-starter-actuator')
+	    	compile('org.springframework.cloud:spring-cloud-starter-zuul')
+	    
+	    // Eureka client
+	    compile('org.springframework.cloud:spring-cloud-starter-eureka')
+}

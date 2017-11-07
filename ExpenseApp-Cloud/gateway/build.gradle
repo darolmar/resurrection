@@ -1,0 +1,19 @@
+mainClassName = 'com.edorasware.microservices.gateway.GatewayApplication'
+
+dependencies {
+	    // Basic Spring boot with config client
+	    compile('org.springframework.cloud:spring-cloud-starter-config')
+	    compile('org.springframework.boot:spring-boot-starter-web')    
+	    compile('org.springframework.boot:spring-boot-starter-actuator')
+    	compile('org.springframework.cloud:spring-cloud-starter-zuul')
+    // Spring OAuth2 security
+    	compile('org.springframework.boot:spring-boot-starter-security')
+    	compile('org.springframework.security.oauth:spring-security-oauth2')
+		compile('org.springframework.cloud:spring-cloud-starter-oauth2')
+		//Swagger
+		compile('io.springfox:springfox-swagger2:' + springfoxVersion)
+		compile('io.springfox:springfox-swagger-ui:' + springfoxVersion)
+    
+    // Eureka client
+    compile('org.springframework.cloud:spring-cloud-starter-eureka')
+}

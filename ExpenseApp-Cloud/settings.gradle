@@ -5,14 +5,14 @@
  * In a single project build this file can be empty or even removed.
  *
  * Detailed information about configuring a multi-project build in Gradle can be found
- * in the user guide at https://docs.gradle.org/3.5/userguide/multi_project_builds.html
+ * in the user guide at https://docs.gradle.org/4.2/userguide/multi_project_builds.html
  */
 
 rootProject.name = 'ExpenseApp-Cloud'
-include 'config-server'
-include 'registry-server'
-include 'gateway'
-include 'web-portal'
-include 'expense-server'
-include 'admin-server'
+include ':config-server'
+include ':registry-server'
+include ':gateway'
+include ':web-portal'
+include ':expense-server'
+include ':admin-server'
 

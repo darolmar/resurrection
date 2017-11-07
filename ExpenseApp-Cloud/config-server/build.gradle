@@ -1,0 +1,4 @@
+mainClassName = 'com.edorasware.microservices.config.ConfigApplication'
+dependencies {
+	compile('org.springframework.cloud:spring-cloud-config-server')
+}

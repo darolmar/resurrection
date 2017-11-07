@@ -1,0 +1,24 @@
+mainClassName = 'com.edorasware.microservices.expense.ExpenseApplication'
+
+dependencies {
+	//Expense service implementation
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('com.zaxxer:HikariCP')
+	compile('org.apache.commons:commons-lang3:3.6')
+	compile('io.springfox:springfox-swagger2:' + springfoxVersion)
+	compile('io.springfox:springfox-swagger-ui:' + springfoxVersion)
+	runtime('org.springframework.boot:spring-boot-devtools')
+	runtime('com.h2database:h2')
+	runtime('mysql:mysql-connector-java')
+    // Basic Spring boot with config client
+    compile('org.springframework.cloud:spring-cloud-starter-config')
+    compile('org.springframework.boot:spring-boot-starter-web')    
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.cloud:spring-cloud-starter-hystrix')    
+    // Eureka client
+    compile('org.springframework.cloud:spring-cloud-starter-eureka')    
+    // Hsytrix dashboard
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix-dashboard')
+	compile('org.springframework.cloud:spring-cloud-starter-turbine')
+}

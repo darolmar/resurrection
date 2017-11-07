@@ -3,9 +3,6 @@
 buildscript {
 	ext {
 		springBootVersion = '1.5.8.RELEASE'
-		springCloudVersion = 'Dalston.SR4'
-		springfoxVersion = '2.7.0'
-		springBootAdmin = '1.5.4'
 	}
 	repositories {
         jcenter()
@@ -24,133 +21,36 @@ buildscript {
 	}
 }
 
+group = 'com.edorasware.microservices'
+version = '1.0'
+
+ext{
+	springCloudVersion = 'Dalston.SR4'
+	springfoxVersion = '2.7.0'
+	springBootAdmin = '1.5.4'
+}
 allprojects {
+}
+subprojects {
 	apply plugin: 'java'
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'io.spring.dependency-management'
 	apply plugin: 'application'
 	apply plugin: 'eclipse'
-	group = 'com.edorasware.microservices'
-	version = '1.0'
-	sourceCompatibility = '1.8'
-	targetCompatibility= '1.8'
 
 	repositories {
 	    mavenCentral()
 	    jcenter()
+		maven { 
+			url 'http://repo.spring.io/milestone/'
+			url 'https://plugins.gradle.org/m2/'
+			url 'https://repo.spring.io/libs-milestone'
+		}
 	}
 
 	dependencyManagement {
 	  imports {
 	    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:' + springCloudVersion
 	  }
-	}
-}
-subprojects {
-
-}
-
-project(':config-server') {
-	mainClassName = 'com.edorasware.microservices.config.ConfigApplication'
-	dependencies {
-		compile('org.springframework.cloud:spring-cloud-config-server')
-	}
-}
-
-project(':registry-server') {
-	mainClassName = 'com.edorasware.microservices.registry.RegistryApplication'
-
-	dependencies {
-		compile('org.springframework.cloud:spring-cloud-starter-config')
-		compile('org.springframework.boot:spring-boot-starter-actuator')
-		compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
-		testCompile('org.springframework.boot:spring-boot-starter-test')
-	}
-}
-
-project(':gateway') {
-	mainClassName = 'com.edorasware.microservices.gateway.GatewayApplication'
-
-	dependencies {
-	    // Basic Spring boot with config client
-	    compile('org.springframework.cloud:spring-cloud-starter-config')
-	    compile('org.springframework.boot:spring-boot-starter-web')    
-	    compile('org.springframework.boot:spring-boot-starter-actuator')
-    	compile('org.springframework.cloud:spring-cloud-starter-zuul')
-    // Spring OAuth2 security
-    	compile('org.springframework.boot:spring-boot-starter-security')
-    	compile('org.springframework.security.oauth:spring-security-oauth2')
-		compile('org.springframework.cloud:spring-cloud-starter-oauth2')
-		//Swagger
-		compile('io.springfox:springfox-swagger2:' + springfoxVersion)
-		compile('io.springfox:springfox-swagger-ui:' + springfoxVersion)
-    
-    // Eureka client
-    compile('org.springframework.cloud:spring-cloud-starter-eureka')
-	}
-}
-
-project(':expense-server') {
-	mainClassName = 'com.edorasware.microservices.expense.ExpenseApplication'
-
-	dependencies {
-		//Expense service implementation
-		compile('org.springframework.boot:spring-boot-starter-data-jpa')
-		compile('com.zaxxer:HikariCP')
-		compile('org.apache.commons:commons-lang3:3.6')
-		compile('io.springfox:springfox-swagger2:' + springfoxVersion)
-		compile('io.springfox:springfox-swagger-ui:' + springfoxVersion)
-		runtime('org.springframework.boot:spring-boot-devtools')
-		runtime('com.h2database:h2')
-		runtime('mysql:mysql-connector-java')
-	    // Basic Spring boot with config client
-	    compile('org.springframework.cloud:spring-cloud-starter-config')
-	    compile('org.springframework.boot:spring-boot-starter-web')    
-	    compile('org.springframework.boot:spring-boot-starter-actuator')
-		compile('org.springframework.cloud:spring-cloud-starter-hystrix')    
-	    // Eureka client
-	    compile('org.springframework.cloud:spring-cloud-starter-eureka')    
-	    // Hsytrix dashboard
-	    compile('org.springframework.cloud:spring-cloud-starter-hystrix')
-	    compile('org.springframework.cloud:spring-cloud-starter-hystrix-dashboard')
-		compile('org.springframework.cloud:spring-cloud-starter-turbine')
-	}
-}
-
-project(':web-portal') {
-	mainClassName = 'com.edorasware.microservices.portal.PortalApplication'
-
-	dependencies {
-    // Basic Spring boot with config client
-    compile('org.springframework.cloud:spring-cloud-starter-config')
-    compile('org.springframework.boot:spring-boot-starter-web')    
-    compile('org.springframework.boot:spring-boot-starter-actuator')
-    // Spring OAuth2 security
-    compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.security.oauth:spring-security-oauth2')    
-    // Eureka client
-    compile('org.springframework.cloud:spring-cloud-starter-eureka')
-    
-    // Hsytrix dashboard
-    compile('org.springframework.cloud:spring-cloud-starter-hystrix')
-    compile('org.springframework.cloud:spring-cloud-starter-hystrix-dashboard')
-	compile('org.springframework.cloud:spring-cloud-starter-turbine')
-	}
-}
-
-project(':admin-server') {
-	mainClassName = 'com.edorasware.microservices.admin.AdminServerApplication'
-
-	dependencies {
-    // Basic Spring boot with config client
-    compile('org.springframework.cloud:spring-cloud-config-client')
-    compile('de.codecentric:spring-boot-admin-server' + ':' + springBootAdmin)
-    compile('de.codecentric:spring-boot-admin-server-ui' + ':' + springBootAdmin)
-    compile('org.springframework.boot:spring-boot-starter-web')    
-    compile('org.springframework.boot:spring-boot-starter-actuator')
-    	compile('org.springframework.cloud:spring-cloud-starter-zuul')
-    
-    // Eureka client
-    compile('org.springframework.cloud:spring-cloud-starter-eureka')
 	}
 }
