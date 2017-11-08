@@ -1,6 +1,7 @@
 package com.edorasware.microservices.expense.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ public class ExpenseServiceImpl implements ExpenseService{
 	@Autowired
 	private ExpenseRepository expenseRepository;	
 	
-	public Expense findById(Integer id) {
-		return expenseRepository.findOne(id);
+	public Optional<Expense> findById(Integer id) {
+		return expenseRepository.findById(id);
 	}
 
 	public List<Expense> findByDescription(String desc) {
@@ -36,7 +37,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 	}
 
 	public void deleteExpenseById(Integer id){
-		expenseRepository.delete(id);
+		expenseRepository.deleteById(id);
 	}
 
 	public void deleteAllExpenses(){

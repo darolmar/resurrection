@@ -2,7 +2,7 @@
 
 buildscript {
 	ext {
-		springBootVersion = '1.5.8.RELEASE'
+		springBootVersion = '2.0.0.M3'
 	}
 	repositories {
         jcenter()
@@ -25,7 +25,7 @@ group = 'com.edorasware.microservices'
 version = '1.0'
 
 ext{
-	springCloudVersion = 'Dalston.SR4'
+	springCloudVersion = 'Finchley.M2'
 	springfoxVersion = '2.7.0'
 	springBootAdmin = '1.5.4'
 }
